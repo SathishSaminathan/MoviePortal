@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, StatusBar, View, ScrollView} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import Orientation from 'react-native-orientation-locker';
 
 import TextComponent from '../components/Shared/TextComponent';
 import ImageComponent from '../components/Shared/ImageComponent';
@@ -34,6 +35,11 @@ const Home = (props) => {
   const [ActionList, setActionList] = useState(null);
   const [List, setList] = useState({});
   useEffect(() => {
+    props.navigation.addListener('focus', () => {
+      Orientation.lockToPortrait();
+    });
+    StatusBar.setBackgroundColor(Colors.yellow)
+    StatusBar.setBarStyle("dark-content")
     firestore()
       .collection('videos')
       .onSnapshot((querySnapshot) => {
@@ -41,7 +47,7 @@ const Home = (props) => {
         // console.log('Total users: ', querySnapshot.size);
         querySnapshot.forEach((doc) => {
           Videos.push(doc.data());
-          console.log('Videos', Videos);
+          // console.log('Videos', Videos);
         });
         // setVideos(Videos);
         let GhostList = [];
@@ -82,7 +88,6 @@ const Home = (props) => {
   }, []);
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.yellow} />
       <ScrollView style={{flex: 1, backgroundColor: Colors.themeBlack}}>
         <View style={{padding: 20}}>
           <TextComponent

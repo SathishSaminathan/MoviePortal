@@ -31,7 +31,9 @@ const MovieComponent = ({videos, title, navigation}) => (
         videos.map((video, i) => (
           <Ripple
             key={i}
-            onPress={() => navigation.navigate('VideoPage')}
+            onPress={() =>
+              navigation.navigate('VideoPage', {URL: video.movieURL})
+            }
             style={{
               width: widthPerc(47),
               backgroundColor: Colors.white,
