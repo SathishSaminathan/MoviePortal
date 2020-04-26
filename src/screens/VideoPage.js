@@ -35,7 +35,7 @@ class VideoPage extends Component {
         />
         <WebView
           source={{
-            uri: URL,
+            uri: `https://www.youtube.com/embed/QUb6pjguPz8`,
           }}
           onLoadStart={() => this.setState({Loading: true})}
           onLoadEnd={() => this.setState({Loading: false})}
