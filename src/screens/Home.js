@@ -9,6 +9,7 @@ import {Colors} from '../constants/ThemeConstants';
 import {heightPerc, widthPerc} from '../helpers/styleHelper';
 import {FontType} from '../constants/AppConstants';
 import MovieComponent from '../components/Shared/MovieComponent';
+import SkeletonMovie from '../components/Shared/SkeletonMovie';
 
 const movieCategories = [
   {
@@ -38,10 +39,10 @@ const Home = (props) => {
     props.navigation.addListener('focus', () => {
       Orientation.lockToPortrait();
     });
-    StatusBar.setBackgroundColor(Colors.yellow)
-    StatusBar.setBarStyle("dark-content")
+    // StatusBar.setBackgroundColor(Colors.yellow);
+    // StatusBar.setBarStyle('dark-content');
     firestore()
-      .collection('videos')
+      .collection('movielist')
       .onSnapshot((querySnapshot) => {
         let Videos = [];
         // console.log('Total users: ', querySnapshot.size);
@@ -49,24 +50,31 @@ const Home = (props) => {
           Videos.push(doc.data());
           // console.log('Videos', Videos);
         });
-        // setVideos(Videos);
+        setTimeout(() => {
+          setVideos(Videos);
+        }, 2000);
         let GhostList = [];
         let ActionList = [];
         let FantasyList = [];
         if (Videos) {
           Videos.map((video) => {
-            let type = video.type;
+            let type = video.Category;
             if (type) {
               switch (type) {
-                case 'GHOST':
+                case 'Ghost':
                   GhostList.push(video);
                   break;
 
-                case 'FANTASY':
+                case 'Fantasy':
                   FantasyList.push(video);
                   break;
 
-                case 'ACTION':
+                case 'Action':
+                  ActionList.push(video);
+                  ActionList.push(video);
+                  ActionList.push(video);
+                  ActionList.push(video);
+                  ActionList.push(video);
                   ActionList.push(video);
                   break;
 
@@ -75,7 +83,7 @@ const Home = (props) => {
               }
             }
           });
-          setVideos(Videos);
+          // setVideos(Videos);
           setList({
             GhostList,
             FantasyList,
@@ -88,7 +96,7 @@ const Home = (props) => {
   }, []);
   return (
     <>
-      <ScrollView style={{flex: 1, backgroundColor: Colors.themeBlack}}>
+      <ScrollView style={{flex: 1, backgroundColor: Colors.white}}>
         <View style={{padding: 20}}>
           <TextComponent
             type={FontType.BOLD}
@@ -98,20 +106,20 @@ const Home = (props) => {
           </TextComponent>
           <TextComponent
             numberOfLines={2}
-            style={{color: Colors.yellow, fontSize: 40}}>
-            PORTEL
+            style={{color: Colors.themeBlack, fontSize: 40}}>
+            PORTAL
           </TextComponent>
         </View>
-
-        {Videos &&
-          movieCategories.map((cat, i) => (
-            <MovieComponent
-              key={i}
-              title={cat.name}
-              videos={List[cat.key]}
-              {...props}
-            />
-          ))}
+        {Videos
+          ? movieCategories.map((cat, i) => (
+              <MovieComponent
+                key={i}
+                title={cat.name}
+                videos={List[cat.key]}
+                {...props}
+              />
+            ))
+          : movieCategories.map((cat, i) => <SkeletonMovie key={i} />)}
       </ScrollView>
     </>
   );

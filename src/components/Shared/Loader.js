@@ -41,12 +41,12 @@ class Loader extends Component {
         style={[
           StyleSheet.absoluteFill,
           {
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.themeBlack,
             alignItems: 'center',
             justifyContent: 'center',
           },
         ]}>
-        <StatusBar animated={true} backgroundColor={StatusBarColor} />
+        {/* <StatusBar animated={true} backgroundColor={StatusBarColor} /> */}
         <ActivityIndicator size="large" color={StatusBarColor} />
       </View>
     );

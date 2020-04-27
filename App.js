@@ -16,7 +16,11 @@ import {MyStack} from './src/router/StackNavigator';
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.yellow} />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={Colors.transparent}
+        translucent
+      />
       <NavigationContainer>
         <MyStack />
       </NavigationContainer>

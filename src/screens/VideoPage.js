@@ -22,30 +22,29 @@ class VideoPage extends Component {
   render() {
     const {Loading} = this.state;
     const {URL, type, videoURL} = this.props.route.params;
-    // console.log('this.props', this.props.route.params);
     return (
       <View
         style={{
           flex: 1,
         }}>
-        <StatusBar
+        {/* <StatusBar
           backgroundColor={Colors.themeBlack}
           barStyle="light-content"
           hidden={!Loading}
-        />
+        /> */}
         <WebView
           source={{
-            uri: `https://www.youtube.com/embed/QUb6pjguPz8`,
+            uri: URL,
           }}
           onLoadStart={() => this.setState({Loading: true})}
           onLoadEnd={() => this.setState({Loading: false})}
-          style={[
-            {
-              width: width,
-              height: height - 10,
-              // backgroundColor: Colors.black,
-            },
-          ]}
+          // style={[
+          //   {
+          //     width: height,
+          //     height: width,
+          //     // backgroundColor: Colors.black,
+          //   },
+          // ]}
         />
 
         {Loading && <Loader />}
