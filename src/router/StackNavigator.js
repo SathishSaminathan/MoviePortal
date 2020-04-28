@@ -6,12 +6,13 @@ import {
 } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import VideoPage from '../screens/VideoPage';
+import SearchGif from '../screens/SearchGif';
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="SearchGif"
       headerMode="none"
       // screenOptions={{
       //   cardOverlayEnabled: true,
@@ -26,6 +27,7 @@ function MyStack() {
       // }}
       >
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="SearchGif" component={SearchGif} />
       <Stack.Screen
         name="VideoPage"
         // options={{
