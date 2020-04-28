@@ -4,6 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import Orientation from 'react-native-orientation-locker';
 
 import TextComponent from '../components/Shared/TextComponent';
+import Carousel from '../components/Shared/Carousel';
 import ImageComponent from '../components/Shared/ImageComponent';
 import {Colors} from '../constants/ThemeConstants';
 import {heightPerc, widthPerc} from '../helpers/styleHelper';
@@ -26,6 +27,31 @@ const movieCategories = [
     name: 'Fantasy Movies',
     value: 'FANTASY',
     key: 'FantasyList',
+  },
+];
+
+const dummyData = [
+  {
+    title: 'Anise Aroma Art Bazar',
+    url: 'https://i.ibb.co/hYjK44F/anise-aroma-art-bazaar-277253.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 1,
+  },
+  {
+    title: 'Food inside a Bowl',
+    url: 'https://i.ibb.co/JtS24qP/food-inside-bowl-1854037.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 2,
+  },
+  {
+    title: 'Vegatable Salad',
+    url:
+      'https://i.ibb.co/JxykVBt/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 3,
   },
 ];
 
@@ -71,11 +97,6 @@ const Home = (props) => {
 
                 case 'Action':
                   ActionList.push(video);
-                  ActionList.push(video);
-                  ActionList.push(video);
-                  ActionList.push(video);
-                  ActionList.push(video);
-                  ActionList.push(video);
                   break;
 
                 default:
@@ -110,6 +131,7 @@ const Home = (props) => {
             PORTAL
           </TextComponent>
         </View>
+        <Carousel data={dummyData} />
         {Videos
           ? movieCategories.map((cat, i) => (
               <MovieComponent
