@@ -1,17 +1,40 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, Dimensions} from 'react-native';
+import Ripple from 'react-native-material-ripple';
+import firestore from '@react-native-firebase/firestore';
+
+const ref = firestore().collection('movielist');
 
 const {width, height} = Dimensions.get('window');
 
-const CarouselItem = ({item}) => {
+const CarouselItem = ({item, navigation}) => {
+  const handleClick = (Value, Views, Link) => {
+    ref
+      .doc(Value)
+      .update({
+        Views: Views + 1,
+      })
+      .then((res) => {
+        navigation.navigate('VideoPage', {URL: Link});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <View style={styles.cardView}>
-      <Image style={styles.image} source={{uri: item.url}} />
-      <View style={styles.textView}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemDescription}>{item.description}</Text>
+    <Ripple
+      style={styles.cardView}
+      rippleContainerBorderRadius={10}
+      onPress={() => handleClick(item.Name, item.Views || 0, item.Link)}>
+      <View>
+        <Image style={styles.image} source={{uri: item.Image}} />
+        <View style={styles.textView}>
+          <Text style={styles.itemTitle}>{item.Name}</Text>
+          {/* <Text style={styles.itemDescription}>{item.description}</Text> */}
+        </View>
       </View>
-    </View>
+    </Ripple>
   );
 };
 

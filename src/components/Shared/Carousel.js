@@ -10,7 +10,7 @@ import {
 import CarouselItem from './CarouselItem';
 
 const {width, heigth} = Dimensions.get('window');
-let flatListRef = React.createRef();
+let flatList = React.createRef();
 
 function infiniteScroll(dataList) {
   const numberOfData = dataList.length;
@@ -24,26 +24,25 @@ function infiniteScroll(dataList) {
       scrollValue = 0;
       scrolled = 0;
     }
-    // flatListRef.scrollToOffset({animated: true, offset: scrollValue});
+    flatList.current.scrollToOffset({animated: true, offset: scrollValue});
   }, 3000);
 }
 
-const Carousel = ({data}) => {
+const Carousel = (props) => {
+  const {data} = props;
   const scrollX = new Animated.Value(0);
   let position = Animated.divide(scrollX, width);
   const [dataList, setDataList] = useState(data);
-
   useEffect(() => {
     setDataList(data);
-    // infiniteScroll(dataList);
+    infiniteScroll(dataList);
   });
-
   if (data && data.length) {
     return (
       <View>
         <FlatList
           data={data}
-          ref={flatListRef}
+          ref={flatList}
           keyExtractor={(item, index) => 'key' + index}
           horizontal
           pagingEnabled
@@ -53,7 +52,7 @@ const Carousel = ({data}) => {
           decelerationRate={'fast'}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => {
-            return <CarouselItem item={item} />;
+            return <CarouselItem {...props} item={item} />;
           }}
           onScroll={Animated.event([
             {nativeEvent: {contentOffset: {x: scrollX}}},

@@ -15,17 +15,17 @@ import SkeletonMovie from '../components/Shared/SkeletonMovie';
 const movieCategories = [
   {
     name: 'Ghost Movies',
-    value: 'GHOST',
+    value: 'Ghost',
     key: 'GhostList',
   },
   {
     name: 'Action Movies',
-    value: 'ACTION',
+    value: 'Action',
     key: 'ActionList',
   },
   {
     name: 'Fantasy Movies',
-    value: 'FANTASY',
+    value: 'Fantasy',
     key: 'FantasyList',
   },
 ];
@@ -60,6 +60,7 @@ const Home = (props) => {
   const [GhostList, setGhostList] = useState(null);
   const [FantasyList, setFantasyList] = useState(null);
   const [ActionList, setActionList] = useState(null);
+  const [TopFive, setTopFive] = useState(null);
   const [List, setList] = useState({});
   useEffect(() => {
     props.navigation.addListener('focus', () => {
@@ -103,6 +104,8 @@ const Home = (props) => {
                   break;
               }
             }
+            let topVideos = Videos.sort((a, b) => b.Views - a.Views).splice(0, 5);
+            setTopFive(topVideos);
           });
           // setVideos(Videos);
           setList({
@@ -117,7 +120,9 @@ const Home = (props) => {
   }, []);
   return (
     <>
-      <ScrollView style={{flex: 1, backgroundColor: Colors.white}}>
+      <ScrollView
+        style={{flex: 1, backgroundColor: Colors.white}}
+        showsVerticalScrollIndicator={false}>
         <View style={{padding: 20}}>
           <TextComponent
             type={FontType.BOLD}
@@ -131,7 +136,7 @@ const Home = (props) => {
             PORTAL
           </TextComponent>
         </View>
-        <Carousel data={dummyData} />
+        {Videos && <Carousel {...props} data={TopFive} />}
         {Videos
           ? movieCategories.map((cat, i) => (
               <MovieComponent
