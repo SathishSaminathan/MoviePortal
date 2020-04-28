@@ -8,6 +8,7 @@ import {
   Animated,
 } from 'react-native';
 import CarouselItem from './CarouselItem';
+import { Colors } from '../../constants/ThemeConstants';
 
 const {width, heigth} = Dimensions.get('window');
 let flatList = React.createRef();
@@ -73,7 +74,8 @@ const Carousel = (props) => {
                   opacity,
                   height: 10,
                   width: 10,
-                  backgroundColor: '#595959',
+                  // backgroundColor: '#595959',
+                  backgroundColor: Colors.yellow,
                   margin: 8,
                   borderRadius: 5,
                 }}

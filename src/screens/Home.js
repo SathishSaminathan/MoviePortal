@@ -104,8 +104,13 @@ const Home = (props) => {
                   break;
               }
             }
-            let topVideos = Videos.sort((a, b) => b.Views - a.Views).splice(0, 5);
-            setTopFive(topVideos);
+            // let topVideos = Videos.sort((a, b) => b.Views - a.Views).slice(
+            //   0,
+            //   5,
+            // );
+            // setTopFive(topVideos);
+            let videos = JSON.parse(JSON.stringify(Videos));
+            setTopFive(videos.sort((a, b) => b.Views - a.Views).slice(0, 5));
           });
           // setVideos(Videos);
           setList({
@@ -121,18 +126,19 @@ const Home = (props) => {
   return (
     <>
       <ScrollView
-        style={{flex: 1, backgroundColor: Colors.white}}
+        overScrollMode="never"
+        style={{flex: 1, backgroundColor: Colors.themeBlack}}
         showsVerticalScrollIndicator={false}>
-        <View style={{padding: 20}}>
+        <View style={{padding: 20, paddingTop: "10%"}}>
           <TextComponent
             type={FontType.BOLD}
             numberOfLines={2}
-            style={{color: Colors.yellow, fontSize: 80}}>
+            style={{color: Colors.yellow, fontSize: 60}}>
             MOVIE
           </TextComponent>
           <TextComponent
             numberOfLines={2}
-            style={{color: Colors.themeBlack, fontSize: 40}}>
+            style={{color: Colors.white, fontSize: 30}}>
             PORTAL
           </TextComponent>
         </View>

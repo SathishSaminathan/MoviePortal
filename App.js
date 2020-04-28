@@ -18,7 +18,7 @@ const App = () => {
     <>
       <StatusBar
         barStyle="dark-content"
-        backgroundColor={Colors.transparent}
+        backgroundColor={Colors.yellow}
         translucent
       />
       <NavigationContainer>

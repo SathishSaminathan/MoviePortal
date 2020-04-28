@@ -18,12 +18,13 @@ const SkeletonMovie = ({videos, title, navigation}) => (
   <View style={{height: heightPerc(35), marginBottom: 20}}>
     <View style={{width: widthPerc(30), paddingLeft: 5}}>
       <Placeholder
-        Animation={Shine}
+        // Animation={Shine}
         style={{
           borderRadius: 0,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          paddingLeft: 5
         }}>
-        <PlaceholderLine color={Colors.accordionBorderColor} width={100} />
+        <PlaceholderLine color={Colors.darkGrey} width={100} />
       </Placeholder>
     </View>
     <View
@@ -42,10 +43,9 @@ const SkeletonMovie = ({videos, title, navigation}) => (
             key={i}
             style={{
               width: widthPerc(47),
-              backgroundColor: Colors.white,
               marginTop: 0,
               marginHorizontal: widthPerc(1),
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.themeBlack,
               borderRadius: 5,
               elevation: 8,
               overflow: 'hidden',
@@ -55,14 +55,14 @@ const SkeletonMovie = ({videos, title, navigation}) => (
               <View style={{flex: 8}}>
                 <View style={{flex: 1, padding: 5}}>
                   <Placeholder
-                    Animation={Shine}
+                    // Animation={Shine}
                     style={{
                       borderRadius: 0,
                       height: '100%',
                       overflow: 'hidden',
                     }}>
                     <PlaceholderLine
-                      color={Colors.accordionBorderColor}
+                      color={Colors.darkGrey}
                       width={100}
                       height={heightPerc(35)}
                       style={{borderRadius: 5}}
@@ -78,7 +78,7 @@ const SkeletonMovie = ({videos, title, navigation}) => (
                   justifyContent: 'center',
                 }}>
                 <Placeholder
-                  Animation={Shine}
+                  // Animation={Shine}
                   style={{
                     borderRadius: 0,
                     height: '100%',
@@ -86,7 +86,7 @@ const SkeletonMovie = ({videos, title, navigation}) => (
                     overflow: 'hidden',
                   }}>
                   <PlaceholderLine
-                    color={Colors.accordionBorderColor}
+                    color={Colors.darkGrey}
                     width={70}
                     //   height={heightPerc(35)}
                     style={{borderRadius: 3}}
