@@ -181,7 +181,7 @@ export default function SearchGif() {
             return (
               <TouchableOpacity
                 style={{width: '50%', height: 100}}
-                onPress={() => saveToCameraRoll(item.images.original.url)}>
+                onPress={() => saveToCameraRoll(item.images.preview_gif.url)}>
                 <Image
                   resizeMode="contain"
                   style={styles.image}
