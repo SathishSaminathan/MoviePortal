@@ -71,11 +71,11 @@ const TabBarButton = ({state, descriptors, navigation}) => {
                 />
               )}
               <TouchableNativeFeedback
-                // background={TouchableNativeFeedback.Ripple('red')}
+                background={TouchableNativeFeedback.Ripple(Colors.yellow)}
                 // containerStyle={{
                 //   backgroundColor: Colors.red,
                 // }}
-                delayPressIn={0}
+                // delayPressIn={0}
                 onPress={onPress}>
                 <View
                   style={[
@@ -83,7 +83,7 @@ const TabBarButton = ({state, descriptors, navigation}) => {
                       flex: 1,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: "#000",
+                      backgroundColor: '#000',
                     },
                   ]}>
                   <IconComponent
