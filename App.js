@@ -12,6 +12,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {Colors} from './src/constants/ThemeConstants';
 import {MyStack} from './src/router/StackNavigator';
+import { TabNavigator } from './src/router/TabNavigator';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         translucent
       />
       <NavigationContainer>
-        <MyStack />
+        <TabNavigator />
       </NavigationContainer>
     </>
   );
