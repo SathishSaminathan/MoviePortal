@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator
-      initialRouteName="SearchGif"
+      initialRouteName="Home"
       headerMode="none"
       // screenOptions={{
       //   cardOverlayEnabled: true,
@@ -27,7 +27,6 @@ function MyStack() {
       // }}
       >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="SearchGif" component={SearchGif} />
       <Stack.Screen
         name="VideoPage"
         // options={{

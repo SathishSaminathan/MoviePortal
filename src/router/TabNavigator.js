@@ -5,6 +5,7 @@ import {IconType} from '../constants/AppConstants';
 import Home from '../screens/Home';
 import SearchGif from '../screens/SearchGif';
 import TabBarButton from './TabBarButton';
+import VideoPage from '../screens/VideoPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,6 +43,17 @@ function TabNavigator() {
         keyboardHidesTabBar: true,
       }}>
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen
+        name="VideoPage"
+        // options={{
+        //   cardStyleInterpolator:
+        //     CardStyleInterpolators.forScaleFromCenterAndroid,
+        // }}
+        options={{
+          tabBarVisible: false,
+        }}
+        component={VideoPage}
+      />
       <Tab.Screen name="Gifs" component={SearchGif} />
     </Tab.Navigator>
   );
