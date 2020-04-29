@@ -9,32 +9,37 @@ import {
   PermissionsAndroid,
   Platform,
   ToastAndroid,
+  ActivityIndicator,
 } from 'react-native';
 import Axios from 'axios';
 import RNFetchBlob from 'react-native-fetch-blob';
 import CameraRoll from '@react-native-community/cameraroll';
-import Share from 'react-native-share';
 
 import {Colors} from '../constants/ThemeConstants';
 import IconComponent from '../components/Shared/IconComponent';
 import {IconType} from '../constants/AppConstants';
+import GifImage from '../components/GifImage';
 
 // do not forget to add fresco animation to build.gradle
 export default function SearchGif() {
   const [gifs, setGifs] = useState([]);
   const [term, updateTerm] = useState('');
+  const [IsLoading, setIsLoading] = useState(false);
 
   const fetchGifs = () => {
+    setIsLoading(true);
     const API_KEY = 'ea8tMej2SwTcfk5HS3uOPkyLDDqg3ixn';
     const BASE_URL = 'http://api.giphy.com/v1/gifs/search';
     let url = `${BASE_URL}?api_key=${API_KEY}&q=${term}&limit=100`;
     // console.log(url);
     Axios.get(url)
       .then((res) => {
+        setIsLoading(false);
         setGifs(res.data.data);
         console.log(res.data.data);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   }; /// add facebook fresco
@@ -42,82 +47,6 @@ export default function SearchGif() {
   function onEdit(newTerm) {
     updateTerm(newTerm);
   }
-
-  const shareImage = (image) => {
-    const shareOptions = {
-      title: 'Checkout the Image',
-      message: 'Picso Image',
-      url: image,
-    };
-    Share.open(shareOptions);
-  };
-
-  const requestCameraPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-        {
-          title: 'Picso App requires Camera Permission',
-          message:
-            'Cool Photo App needs access to your camera ' +
-            'so you can take awesome pictures.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        ToastAndroid.showWithGravityAndOffset(
-          'Your Gif is downloading...',
-          ToastAndroid.SHORT,
-          ToastAndroid.BOTTOM,
-          25,
-          50,
-        );
-        return true;
-      } else {
-        ToastAndroid.showWithGravityAndOffset(
-          'Please grant permission to save the images...',
-          ToastAndroid.SHORT,
-          ToastAndroid.BOTTOM,
-          25,
-          50,
-        );
-        return false;
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
-  const saveToCameraRoll = (image) => {
-    // const isGranted = requestCameraPermission();
-    // if (Platform.OS === 'android') {
-    RNFetchBlob.config({
-      fileCache: true,
-      appendExt: 'gif',
-    })
-      .fetch('GET', image)
-      .then((res) => {
-        shareImage(`file://${res.path()}`);
-        // CameraRoll.saveToCameraRoll(res.path())
-        //   .then((res) => {
-        //     ToastAndroid.showWithGravityAndOffset(
-        //       'Gif added to Gallery!',
-        //       ToastAndroid.SHORT,
-        //       ToastAndroid.BOTTOM,
-        //       25,
-        //       50,
-        //     );
-        //   })
-        //   .catch((err) => console.log('err:', err));
-      });
-    // } else {
-    //   CameraRoll.saveToCameraRoll(image.urls.small).then(
-    //     Alert.alert('Success', 'Photo added to camera roll!'),
-    //   );
-    // }
-  };
 
   return (
     <View style={styles.view}>
@@ -143,6 +72,8 @@ export default function SearchGif() {
               placeholderTextColor={Colors.darkGrey}
               style={styles.textInput}
               onChangeText={(text) => onEdit(text)}
+              returnKeyType="search"
+              onSubmitEditing={fetchGifs}
             />
           </View>
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -170,28 +101,31 @@ export default function SearchGif() {
           </View>
         </View>
       </View>
-      {gifs ? (
+      {!IsLoading ? (
         <FlatList
           style={{width: '100%', marginTop: 10}}
           data={gifs}
           //   horizontal
           numColumns={2}
           renderItem={({item}) => {
-            //   console.log("item.images.preview_gif.url", item.images.preview_gif.url)
-            return (
-              <TouchableOpacity
-                style={{width: '50%', height: 100}}
-                onPress={() => saveToCameraRoll(item.images.downsized.url)}>
-                <Image
-                  resizeMode="contain"
-                  style={styles.image}
-                  source={{uri: item.images.preview_gif.url}}
-                />
-              </TouchableOpacity>
-            );
+            return <GifImage item={item} />;
           }}
         />
-      ) : null}
+      ) : (
+        <View
+          style={[
+            // StyleSheet.absoluteFill,
+            {
+              // backgroundColor: '#00000085',
+              zIndex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              flex: 1,
+            },
+          ]}>
+          <ActivityIndicator color={Colors.yellow} />
+        </View>
+      )}
     </View>
   );
 }

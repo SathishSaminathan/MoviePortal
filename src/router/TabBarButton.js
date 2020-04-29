@@ -23,7 +23,13 @@ const TabBarButton = ({state, descriptors, navigation}) => {
     Notifications: 'bell',
   };
   return (
-    <View style={{flexDirection: 'row', height: 60}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        height: 60,
+        elevation: 100,
+        backgroundColor: Colors.themeBlack,
+      }}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -75,7 +81,7 @@ const TabBarButton = ({state, descriptors, navigation}) => {
                 // containerStyle={{
                 //   backgroundColor: Colors.red,
                 // }}
-                // delayPressIn={0}
+                delayPressIn={0}
                 onPress={onPress}>
                 <View
                   style={[
@@ -83,7 +89,7 @@ const TabBarButton = ({state, descriptors, navigation}) => {
                       flex: 1,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: '#000',
+                      backgroundColor: Colors.themeBlack,
                     },
                   ]}>
                   <IconComponent
