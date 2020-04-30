@@ -17,6 +17,7 @@ import {TabNavigator} from './src/router/TabNavigator';
 import IconComponent from './src/components/Shared/IconComponent';
 import {IconType} from './src/constants/AppConstants';
 import TextComponent from './src/components/Shared/TextComponent';
+import Splash from './src/components/Shared/Splash';
 
 class App extends Component {
   state = {
@@ -109,9 +110,10 @@ class App extends Component {
             </MaskedView>
           </View>
         ) : ( */}
-        <NavigationContainer>
+        {/* <NavigationContainer>
           <TabNavigator />
-        </NavigationContainer>
+        </NavigationContainer> */}
+        <Splash />
         {/* )} */}
       </>
     );
