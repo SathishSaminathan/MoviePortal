@@ -17,7 +17,9 @@ class VideoPage extends Component {
     };
   }
   componentDidMount() {
-    Orientation.lockToLandscape();
+    this.props.navigation.addListener('focus', () => {
+      Orientation.lockToLandscape();
+    });
   }
   render() {
     const {Loading} = this.state;
