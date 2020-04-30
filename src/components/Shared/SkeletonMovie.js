@@ -24,7 +24,7 @@ const SkeletonMovie = ({videos, title, navigation}) => (
           backgroundColor: Colors.transparent,
           paddingLeft: 5
         }}>
-        <PlaceholderLine color={Colors.darkGrey} width={100} />
+        <PlaceholderLine color={Colors.themeBlack1} width={100} />
       </Placeholder>
     </View>
     <View
@@ -62,7 +62,7 @@ const SkeletonMovie = ({videos, title, navigation}) => (
                       overflow: 'hidden',
                     }}>
                     <PlaceholderLine
-                      color={Colors.darkGrey}
+                      color={Colors.themeBlack1}
                       width={100}
                       height={heightPerc(35)}
                       style={{borderRadius: 5}}
@@ -86,7 +86,7 @@ const SkeletonMovie = ({videos, title, navigation}) => (
                     overflow: 'hidden',
                   }}>
                   <PlaceholderLine
-                    color={Colors.darkGrey}
+                    color={Colors.themeBlack1}
                     width={70}
                     //   height={heightPerc(35)}
                     style={{borderRadius: 3}}

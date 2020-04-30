@@ -23,6 +23,7 @@ class App extends Component {
   state = {
     loadingProgress: new Animated.Value(0),
     animationDone: false,
+    splashLoaded: false,
   };
 
   componentDidMount() {
@@ -35,9 +36,15 @@ class App extends Component {
         animationDone: true,
       });
     });
+    setTimeout(() => {
+      this.setState({
+        splashLoaded: true,
+      });
+    }, 1000);
   }
   render() {
     const loadingProgress = this.state.loadingProgress;
+    const {splashLoaded} = this.state;
 
     const opacityClearToVisible = {
       opacity: loadingProgress.interpolate({
@@ -86,9 +93,10 @@ class App extends Component {
           barStyle="dark-content"
           backgroundColor={Colors.themeBlack}
           translucent
+          hidden
         />
 
-        {/* {opacityClearToVisible !== 1 ? (
+      {/* {opacityClearToVisible !== 1 ? (
           <View style={{flex: 1}}>
             {fullScreenBlueLayer}
             <MaskedView
@@ -110,10 +118,13 @@ class App extends Component {
             </MaskedView>
           </View>
         ) : ( */}
-        {/* <NavigationContainer>
-          <TabNavigator />
-        </NavigationContainer> */}
-        <Splash />
+        {splashLoaded ? (
+          <NavigationContainer>
+            <TabNavigator />
+          </NavigationContainer>
+        ) : (
+          <Splash />
+        )}
         {/* )} */}
       </>
     );

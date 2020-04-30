@@ -14,7 +14,7 @@ const TabBarButton = ({state, descriptors, navigation}) => {
     Profile: 'account-circle-outline',
     Wishlist: 'heart',
     MapView: 'map',
-    Gifs: 'briefcase-outline',
+    Gifs: 'archive',
     Offers: 'tag-outline',
     Settings: 'settings',
     Fashion: 'layout',
@@ -93,7 +93,7 @@ const TabBarButton = ({state, descriptors, navigation}) => {
                     },
                   ]}>
                   <IconComponent
-                    type={IconType.MaterialCommunityIcons}
+                    type={IconType.Feather}
                     name={iconMap[label]}
                     size={isFocused ? 20 : 20}
                     style={[

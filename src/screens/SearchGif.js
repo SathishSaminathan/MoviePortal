@@ -69,11 +69,12 @@ export default function SearchGif() {
           <View style={{flex: 8}}>
             <TextInput
               placeholder="Search Giphy"
-              placeholderTextColor={Colors.darkGrey}
+              placeholderTextColor={Colors.yellow}
               style={styles.textInput}
               onChangeText={(text) => onEdit(text)}
               returnKeyType="search"
               onSubmitEditing={fetchGifs}
+              selectionColor={Colors.yellow}
             />
           </View>
           <View style={{alignItems: 'center', justifyContent: 'center'}}>

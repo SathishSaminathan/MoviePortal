@@ -28,7 +28,7 @@ const Splash = ({params}) => (
       //   iterationCount="infinite"
     />
     <Animatable.Text
-      delay={1000}
+      delay={500}
       animation="fadeIn"
       style={{
         fontFamily: 'Proxima Nova Regular',
