@@ -119,7 +119,8 @@ const Home = (props) => {
             // );
             // setTopFive(topVideos);
             let videos = JSON.parse(JSON.stringify(Videos));
-            setTopFive(videos.sort((a, b) => b.Views - a.Views).slice(0, 5));
+            // setTopFive(videos.sort((a, b) => b.Views - a.Views).slice(0, 5));
+            setTopFive(videos.slice(0, 5));
           });
           // setVideos(Videos);
           setList({

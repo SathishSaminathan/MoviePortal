@@ -10,6 +10,7 @@ import {FontType, IconType} from '../constants/AppConstants';
 import Ripple from 'react-native-material-ripple';
 import IconComponent from '../components/Shared/IconComponent';
 import {PlaceholderLine, Placeholder} from 'rn-placeholder';
+import Orientation from 'react-native-orientation-locker';
 
 const det = {
   Title: 'Shazam',
@@ -41,15 +42,21 @@ const det = {
   Response: 'True',
 };
 
-const MovieDetails = ({params}) => {
+const MovieDetails = ({navigation, route}) => {
+  const {Name, Image, Link} = route.params;
   const [Detail, setDetail] = useState(null);
   useEffect(() => {
     getDetails();
+  }, [Name]);
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      Orientation.lockToPortrait();
+    });
   }, []);
   const getDetails = () => {
-    Axios.get('http://www.omdbapi.com/?t=shazam&apikey=a851fc51')
+    Axios.get(`http://www.omdbapi.com/?t=${Name}&apikey=a851fc51`)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
         setDetail(res.data);
       })
       .catch((err) => {
@@ -67,6 +74,7 @@ const MovieDetails = ({params}) => {
           flexDirection: 'row',
         }}>
         <Ripple
+          onPress={() => navigation.goBack()}
           rippleContainerBorderRadius={25}
           style={{
             width: 50,
@@ -98,7 +106,7 @@ const MovieDetails = ({params}) => {
                 borderRadius: 5,
                 overflow: 'hidden',
               }}>
-              <ImageComponent source={{uri: Detail.Poster}} />
+              <ImageComponent source={{uri: Image}} />
               {/* <TextComponent
             style={{
               position: 'absolute',
@@ -128,8 +136,10 @@ const MovieDetails = ({params}) => {
                 {Detail.imdbRating}
               </TextComponent>
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <View
+            <ScrollView
+              horizontal
+              contentContainerStyle={{flexDirection: 'row', flexGrow: 1}}>
+              {/* <View
                 style={{
                   backgroundColor: Colors.yellow,
                   alignSelf: 'flex-start',
@@ -142,7 +152,7 @@ const MovieDetails = ({params}) => {
                 <TextComponent type={FontType.BOLD}>
                   {Detail.Language}
                 </TextComponent>
-              </View>
+              </View> */}
               <View
                 style={{
                   backgroundColor: Colors.yellow,
@@ -168,7 +178,7 @@ const MovieDetails = ({params}) => {
                   {Detail.Genre}
                 </TextComponent>
               </View>
-            </View>
+            </ScrollView>
             <View
               style={{
                 // marginTop: 10,
@@ -277,6 +287,7 @@ const MovieDetails = ({params}) => {
         )}
       </View>
       <TouchableOpacity
+        onPress={() => navigation.navigate('VideoPage', {URL: Link})}
         activeOpacity={0.8}
         style={{
           height: 60,

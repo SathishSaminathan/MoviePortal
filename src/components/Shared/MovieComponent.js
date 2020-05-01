@@ -12,14 +12,15 @@ import {FontType} from '../../constants/AppConstants';
 const ref = firestore().collection('movielist');
 
 const MovieComponent = ({videos, title, navigation}) => {
-  const handleClick = (Value, Views, Link) => {
+  const handleClick = (Value, Views, Link, Image) => {
     ref
       .doc(Value)
       .update({
-        Views: Views + 1,
+        // Views: Views + 1,
+        Views,
       })
       .then((res) => {
-        navigation.navigate('VideoPage', {URL: Link});
+        navigation.navigate('MovieDetails', {Link, Name: Value, Image});
       })
       .catch((err) => {
         console.log(err);
@@ -50,9 +51,13 @@ const MovieComponent = ({videos, title, navigation}) => {
             videos.map((video, i) => (
               <Ripple
                 key={i}
-                onPress={
-                  () => handleClick(video.Name, video.Views || 0, video.Link)
-                  // navigation.navigate('VideoPage', {URL: video.Link})
+                onPress={() =>
+                  handleClick(
+                    video.Name,
+                    video.Views || 0,
+                    video.Link,
+                    video.Image,
+                  )
                 }
                 style={{
                   width: widthPerc(47),

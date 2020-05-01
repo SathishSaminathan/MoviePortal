@@ -25,12 +25,10 @@ function infiniteScroll(dataList) {
       scrollValue = 0;
       scrolled = 0;
     }
-    if (
-      flatList &&
+
+    flatList &&
       flatList.current &&
-      flatList.current.scrollToOffset({animated: true, offset: scrollValue})
-    ) {
-    }
+      flatList.current.scrollToOffset({animated: true, offset: scrollValue});
   }, 3000);
 }
 

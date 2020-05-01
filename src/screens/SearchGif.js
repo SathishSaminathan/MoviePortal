@@ -36,7 +36,7 @@ export default function SearchGif() {
       .then((res) => {
         setIsLoading(false);
         setGifs(res.data.data);
-        console.log(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err) => {
         setIsLoading(false);
