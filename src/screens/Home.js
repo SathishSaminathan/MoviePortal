@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Orientation from 'react-native-orientation-locker';
+import Dialog, {DialogContent} from 'react-native-popup-dialog';
 
 import TextComponent from '../components/Shared/TextComponent';
 import IconComponent from '../components/Shared/IconComponent';
@@ -68,6 +69,7 @@ const Home = (props) => {
   const [FantasyList, setFantasyList] = useState(null);
   const [ActionList, setActionList] = useState(null);
   const [TopFive, setTopFive] = useState(null);
+  const [InfoVisible, setInfoVisible] = useState(false);
   const [List, setList] = useState({});
   useEffect(() => {
     props.navigation.addListener('focus', () => {
@@ -149,11 +151,14 @@ const Home = (props) => {
               style={{color: Colors.white, fontSize: 30, paddingRight: 10}}>
               PORTAL
             </TextComponent>
-            <TouchableOpacity activeOpacity={0.8}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => setInfoVisible(true)}>
               <IconComponent
                 color={Colors.lightGrey}
                 type={IconType.Feather}
                 name="info"
+                size={15}
               />
             </TouchableOpacity>
           </View>
@@ -170,6 +175,30 @@ const Home = (props) => {
             ))
           : movieCategories.map((cat, i) => <SkeletonMovie key={i} />)}
       </ScrollView>
+      <Dialog
+        containerStyle={{backgroundColor: '#00000085'}}
+        visible={InfoVisible}
+        onTouchOutside={() => {
+          setInfoVisible(false);
+        }}>
+        <DialogContent
+          style={{backgroundColor: Colors.white, width: widthPerc(80)}}>
+          <View style={{paddingTop: 10}}>
+            <TextComponent type={FontType.BOLD} style={{fontSize: 20}}>
+              Disclaimer
+            </TextComponent>
+            <TextComponent>
+              The content provided in this application is available free on
+              public domains. This is title third party streaming player app,
+              not title downloader. We do not upload any videos or not showing
+              any modified content. This app is just customising the videos in
+              title more user-friendly way for users. We don't claim right on
+              any file in this application. All the content provided in this
+              application has the copyrights of their respective owners.
+            </TextComponent>
+          </View>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
