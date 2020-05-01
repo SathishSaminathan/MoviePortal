@@ -8,7 +8,7 @@ import {
   Animated,
 } from 'react-native';
 import CarouselItem from './CarouselItem';
-import { Colors } from '../../constants/ThemeConstants';
+import {Colors} from '../../constants/ThemeConstants';
 
 const {width, heigth} = Dimensions.get('window');
 let flatList = React.createRef();
@@ -25,7 +25,12 @@ function infiniteScroll(dataList) {
       scrollValue = 0;
       scrolled = 0;
     }
-    flatList.current.scrollToOffset({animated: true, offset: scrollValue});
+    if (
+      flatList &&
+      flatList.current &&
+      flatList.current.scrollToOffset({animated: true, offset: scrollValue})
+    ) {
+    }
   }, 3000);
 }
 
