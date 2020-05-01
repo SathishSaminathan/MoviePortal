@@ -82,7 +82,7 @@ const MovieDetails = ({params}) => {
         <TextComponent
           type={FontType.BOLD}
           style={{color: Colors.yellow, fontSize: 20}}>
-          {Detail.Title}
+          More details
         </TextComponent>
       </View>
       <View style={{padding: 10}}>
@@ -102,18 +102,63 @@ const MovieDetails = ({params}) => {
             {Detail.Title}
           </TextComponent> */}
             </View>
-            <View
-              style={{
-                backgroundColor: Colors.yellow,
-                alignSelf: 'flex-start',
-                marginVertical: 10,
-                padding: 10,
-                paddingHorizontal: 20,
-                borderRadius: 50,
-              }}>
-              <TextComponent style={{fontSize: 15}} type={FontType.BOLD}>
-                {Detail.Language}
+            <TextComponent
+              type={FontType.BOLD}
+              style={{color: Colors.yellow, fontSize: 30, paddingTop: 10}}>
+              {Detail.Title}
+            </TextComponent>
+            <View style={{flexDirection: 'row'}}>
+              <IconComponent
+                type={IconType.AntDesign}
+                name="star"
+                color={Colors.yellow}
+              />
+              <TextComponent
+                type={FontType.BOLD}
+                style={{color: Colors.yellow, marginLeft: 5}}>
+                {Detail.imdbRating}
               </TextComponent>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  backgroundColor: Colors.yellow,
+                  alignSelf: 'flex-start',
+                  marginVertical: 10,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
+                  borderRadius: 50,
+                  marginRight: 10,
+                }}>
+                <TextComponent type={FontType.BOLD}>
+                  {Detail.Language}
+                </TextComponent>
+              </View>
+              <View
+                style={{
+                  backgroundColor: Colors.yellow,
+                  alignSelf: 'flex-start',
+                  marginVertical: 10,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
+                  borderRadius: 50,
+                  marginRight: 10,
+                }}>
+                <TextComponent type={FontType.BOLD}>Tamil Dubbed</TextComponent>
+              </View>
+              <View
+                style={{
+                  backgroundColor: Colors.yellow,
+                  alignSelf: 'flex-start',
+                  marginVertical: 10,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
+                  borderRadius: 50,
+                }}>
+                <TextComponent type={FontType.BOLD}>
+                  {Detail.Genre}
+                </TextComponent>
+              </View>
             </View>
             <View
               style={{
@@ -123,34 +168,53 @@ const MovieDetails = ({params}) => {
                 padding: 10,
               }}>
               <TextComponent
-                style={{fontSize: 15, color: Colors.white}}
+                style={{fontSize: 15, color: Colors.accordionBorderColor}}
                 type={FontType.BOLD}>
                 Plot
               </TextComponent>
-              <TextComponent style={{color: Colors.white}}>
+              <TextComponent style={{color: Colors.accordionBorderColor}}>
                 {Detail.Plot}
               </TextComponent>
-              <View style={{paddingVertical: 10, flexDirection: 'row'}}>
+              <View
+                style={{
+                  paddingTop: 10,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
                 <TextComponent
-                  style={{fontSize: 15, color: Colors.white}}
+                  style={{fontSize: 15, color: Colors.accordionBorderColor}}
                   type={FontType.BOLD}>
                   Genre :{` `}
                 </TextComponent>
-                <TextComponent style={{color: Colors.white}}>
+                <TextComponent style={{color: Colors.accordionBorderColor}}>
                   {Detail.Genre}
                 </TextComponent>
               </View>
-              <View>
+              <View style={{paddingTop: 10}}>
                 <TextComponent
-                  style={{fontSize: 15, color: Colors.white}}
+                  style={{fontSize: 15, color: Colors.accordionBorderColor}}
                   type={FontType.BOLD}>
                   Actors :{` `}
                 </TextComponent>
                 <View>
-                  <TextComponent style={{color: Colors.white}}>
+                  <TextComponent style={{color: Colors.accordionBorderColor}}>
                     {Detail.Actors}
                   </TextComponent>
                 </View>
+              </View>
+              <View
+                style={{
+                  backgroundColor: Colors.yellow,
+                  alignSelf: 'flex-start',
+                  marginTop: 10,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
+                  borderRadius: 50,
+                  marginRight: 10,
+                }}>
+                <TextComponent style={{}} type={FontType.BOLD}>
+                  {Detail.Year}
+                </TextComponent>
               </View>
             </View>
           </ScrollView>
