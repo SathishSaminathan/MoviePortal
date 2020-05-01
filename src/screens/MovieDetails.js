@@ -9,39 +9,42 @@ import TextComponent from '../components/Shared/TextComponent';
 import {FontType, IconType} from '../constants/AppConstants';
 import Ripple from 'react-native-material-ripple';
 import IconComponent from '../components/Shared/IconComponent';
+import {PlaceholderLine, Placeholder} from 'rn-placeholder';
+
+const det = {
+  Title: 'Shazam',
+  Year: '2017',
+  Rated: 'N/A',
+  Released: '19 Mar 2017',
+  Runtime: '6 min',
+  Genre: 'Short, Family',
+  Director: 'Royston Innes',
+  Writer: 'Royston Innes',
+  Actors: 'Roman Dior Degeddingseze, Christopher Mychael Watson',
+  Plot:
+    'A father teaches his son about the harsh realities of being a black man in a new and inventive way.',
+  Language: 'English',
+  Country: 'USA',
+  Awards: 'N/A',
+  Poster:
+    'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSoar8y_ZLMjpU2DUCmYy4twmLqIGwLIUr7OHvV4oGYWYt3aB0-',
+  Ratings: [{Source: 'Internet Movie Database', Value: '8.2/10'}],
+  Metascore: 'N/A',
+  imdbRating: '8.2',
+  imdbVotes: '41',
+  imdbID: 'tt6723576',
+  Type: 'movie',
+  DVD: 'N/A',
+  BoxOffice: 'N/A',
+  Production: 'N/A',
+  Website: 'N/A',
+  Response: 'True',
+};
 
 const MovieDetails = ({params}) => {
-  const [Detail, setDetail] = useState({
-    Title: 'Shazam',
-    Year: '2017',
-    Rated: 'N/A',
-    Released: '19 Mar 2017',
-    Runtime: '6 min',
-    Genre: 'Short, Family',
-    Director: 'Royston Innes',
-    Writer: 'Royston Innes',
-    Actors: 'Roman Dior Degeddingseze, Christopher Mychael Watson',
-    Plot:
-      'A father teaches his son about the harsh realities of being a black man in a new and inventive way.',
-    Language: 'English',
-    Country: 'USA',
-    Awards: 'N/A',
-    Poster:
-      'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSoar8y_ZLMjpU2DUCmYy4twmLqIGwLIUr7OHvV4oGYWYt3aB0-',
-    Ratings: [{Source: 'Internet Movie Database', Value: '8.2/10'}],
-    Metascore: 'N/A',
-    imdbRating: '8.2',
-    imdbVotes: '41',
-    imdbID: 'tt6723576',
-    Type: 'movie',
-    DVD: 'N/A',
-    BoxOffice: 'N/A',
-    Production: 'N/A',
-    Website: 'N/A',
-    Response: 'True',
-  });
+  const [Detail, setDetail] = useState(null);
   useEffect(() => {
-    // getDetails();
+    getDetails();
   }, []);
   const getDetails = () => {
     Axios.get('http://www.omdbapi.com/?t=shazam&apikey=a851fc51')
@@ -58,7 +61,7 @@ const MovieDetails = ({params}) => {
       <View
         style={{
           height: 60,
-          backgroundColor: Colors.themeBlack1,
+          backgroundColor: Colors.themeBlack,
           alignItems: 'center',
           paddingHorizontal: 10,
           flexDirection: 'row',
@@ -85,10 +88,16 @@ const MovieDetails = ({params}) => {
           More details
         </TextComponent>
       </View>
-      <View style={{padding: 10}}>
-        {Detail && (
+      <View style={{padding: 10, flex: 1}}>
+        {Detail ? (
           <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: 50}}>
-            <View style={{width: '100%', height: heightPerc(40)}}>
+            <View
+              style={{
+                width: '100%',
+                height: heightPerc(40),
+                borderRadius: 5,
+                overflow: 'hidden',
+              }}>
               <ImageComponent source={{uri: Detail.Poster}} />
               {/* <TextComponent
             style={{
@@ -218,6 +227,53 @@ const MovieDetails = ({params}) => {
               </View>
             </View>
           </ScrollView>
+        ) : (
+          <View style={{flex: 1}}>
+            <View
+              style={{
+                width: '100%',
+                height: heightPerc(40),
+                backgroundColor: Colors.themeBlack1,
+              }}
+            />
+            <PlaceholderLine
+              color={Colors.themeBlack1}
+              width={50}
+              //   height={heightPerc(35)}
+              style={{borderRadius: 3, marginTop: 10}}
+            />
+            <PlaceholderLine
+              color={Colors.themeBlack1}
+              width={20}
+              //   height={heightPerc(35)}
+              style={{borderRadius: 3, marginTop: 0}}
+            />
+            <View style={{flexDirection: 'row'}}>
+              <PlaceholderLine
+                color={Colors.themeBlack1}
+                width={30}
+                //   height={heightPerc(35)}
+                style={{
+                  borderRadius: 50,
+                  marginRight: 10,
+                  height: 30,
+                  marginTop: 0,
+                }}
+              />
+              <PlaceholderLine
+                color={Colors.themeBlack1}
+                width={30}
+                //   height={heightPerc(35)}
+                style={{borderRadius: 50, height: 30, marginTop: 0}}
+              />
+            </View>
+            <View
+              style={{
+                height: 100,
+                backgroundColor: Colors.themeBlack1,
+                borderRadius: 5,
+              }}></View>
+          </View>
         )}
       </View>
       <TouchableOpacity
