@@ -19,6 +19,7 @@ import {IconType} from './src/constants/AppConstants';
 import TextComponent from './src/components/Shared/TextComponent';
 import Splash from './src/components/Shared/Splash';
 
+// Is CN=Sathish Saminathan, OU=SKTech, O=SKTech, L=Tirupur, ST=Tamilnadu, C=IN correct?
 class App extends Component {
   state = {
     loadingProgress: new Animated.Value(0),

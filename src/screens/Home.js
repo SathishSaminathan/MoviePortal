@@ -1,14 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, StatusBar, View, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  StatusBar,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import Orientation from 'react-native-orientation-locker';
 
 import TextComponent from '../components/Shared/TextComponent';
+import IconComponent from '../components/Shared/IconComponent';
 import Carousel from '../components/Shared/Carousel';
 import ImageComponent from '../components/Shared/ImageComponent';
 import {Colors} from '../constants/ThemeConstants';
 import {heightPerc, widthPerc} from '../helpers/styleHelper';
-import {FontType} from '../constants/AppConstants';
+import {FontType, IconType} from '../constants/AppConstants';
 import MovieComponent from '../components/Shared/MovieComponent';
 import SkeletonMovie from '../components/Shared/SkeletonMovie';
 
@@ -129,18 +136,27 @@ const Home = (props) => {
         overScrollMode="never"
         style={{flex: 1, backgroundColor: Colors.themeBlack}}
         showsVerticalScrollIndicator={false}>
-        <View style={{padding: 20, paddingTop: "10%"}}>
+        <View style={{padding: 20, paddingTop: '10%'}}>
           <TextComponent
             type={FontType.BOLD}
             numberOfLines={2}
             style={{color: Colors.yellow, fontSize: 60}}>
             MOVIE
           </TextComponent>
-          <TextComponent
-            numberOfLines={2}
-            style={{color: Colors.white, fontSize: 30}}>
-            PORTAL
-          </TextComponent>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TextComponent
+              numberOfLines={2}
+              style={{color: Colors.white, fontSize: 30, paddingRight: 10}}>
+              PORTAL
+            </TextComponent>
+            <TouchableOpacity activeOpacity={0.8}>
+              <IconComponent
+                color={Colors.lightGrey}
+                type={IconType.Feather}
+                name="info"
+              />
+            </TouchableOpacity>
+          </View>
         </View>
         {Videos && <Carousel {...props} data={TopFive} />}
         {Videos
