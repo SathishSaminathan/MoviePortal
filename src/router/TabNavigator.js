@@ -6,13 +6,14 @@ import Home from '../screens/Home';
 import SearchGif from '../screens/SearchGif';
 import TabBarButton from './TabBarButton';
 import VideoPage from '../screens/VideoPage';
+import MovieDetails from '../screens/MovieDetails';
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="MovieDetails"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
@@ -53,6 +54,17 @@ function TabNavigator() {
           tabBarVisible: false,
         }}
         component={VideoPage}
+      />
+      <Tab.Screen
+        name="MovieDetails"
+        // options={{
+        //   cardStyleInterpolator:
+        //     CardStyleInterpolators.forScaleFromCenterAndroid,
+        // }}
+        options={{
+          tabBarVisible: false,
+        }}
+        component={MovieDetails}
       />
       <Tab.Screen name="Gifs" component={SearchGif} />
     </Tab.Navigator>

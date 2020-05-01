@@ -41,7 +41,7 @@ class App extends Component {
       this.setState({
         splashLoaded: true,
       });
-    }, 1000);
+    }, 0);
   }
   render() {
     const loadingProgress = this.state.loadingProgress;

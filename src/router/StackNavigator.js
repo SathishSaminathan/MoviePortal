@@ -7,12 +7,13 @@ import {
 import Home from '../screens/Home';
 import VideoPage from '../screens/VideoPage';
 import SearchGif from '../screens/SearchGif';
+import MovieDetails from '../screens/MovieDetails';
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="MovieDetails"
       headerMode="none"
       // screenOptions={{
       //   cardOverlayEnabled: true,
@@ -34,6 +35,14 @@ function MyStack() {
         //     CardStyleInterpolators.forScaleFromCenterAndroid,
         // }}
         component={VideoPage}
+      />
+      <Stack.Screen
+        name="MovieDetails"
+        // options={{
+        //   cardStyleInterpolator:
+        //     CardStyleInterpolators.forScaleFromCenterAndroid,
+        // }}
+        component={MovieDetails}
       />
     </Stack.Navigator>
   );

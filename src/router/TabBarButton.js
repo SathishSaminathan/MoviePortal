@@ -60,7 +60,7 @@ const TabBarButton = ({state, descriptors, navigation}) => {
           });
         };
 
-        if (label !== 'PaymentSuccess' && label !== 'VideoPage') {
+        if (label !== 'MovieDetails' && label !== 'VideoPage') {
           return (
             <View style={{flex: 1}} key={index}>
               {isFocused && (
