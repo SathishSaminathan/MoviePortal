@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, ScrollView} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import Axios from 'axios';
 
 import {Colors} from '../constants/ThemeConstants';
@@ -156,6 +156,25 @@ const MovieDetails = ({params}) => {
           </ScrollView>
         )}
       </View>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={{
+          height: 60,
+          width: 60,
+          backgroundColor: Colors.yellow,
+          borderRadius: 30,
+          position: 'absolute',
+          bottom: 10,
+          left: widthPerc(50) - 30,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <IconComponent
+          name="play"
+          type={IconType.MaterialCommunityIcons}
+          size={30}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
