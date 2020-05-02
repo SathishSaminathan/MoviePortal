@@ -19,7 +19,7 @@ class VideoPage extends Component {
   }
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      // Orientation.lockToLandscape();
+      Orientation.lockToLandscape();
       this.setState({Visible: true});
     });
     this.props.navigation.addListener('blur', () => {

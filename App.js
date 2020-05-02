@@ -18,6 +18,7 @@ import IconComponent from './src/components/Shared/IconComponent';
 import {IconType} from './src/constants/AppConstants';
 import TextComponent from './src/components/Shared/TextComponent';
 import Splash from './src/components/Shared/Splash';
+import Orientation from 'react-native-orientation-locker';
 
 // Is CN=Sathish Saminathan, OU=SKTech, O=SKTech, L=Tirupur, ST=Tamilnadu, C=IN correct?
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    Orientation.lockToPortrait();
     Animated.timing(this.state.loadingProgress, {
       toValue: 100,
       duration: 1000,

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 import Axios from 'axios';
 
 import {Colors} from '../constants/ThemeConstants';
@@ -46,17 +47,26 @@ const MovieDetails = ({navigation, route}) => {
   const {Name, Image, Link} = route.params;
   const [Detail, setDetail] = useState(null);
   const [Loading, setLoading] = useState(false);
-  console.log('MovieDetails', Name);
+  const [StateName, setStateName] = useState(Name);
+  const isFocused = useIsFocused();
+  console.log('MovieDetails', isFocused);
 
   useEffect(() => {
-    getDetails();
-  }, [Name]);
+    if (isFocused) {
+      getDetails();
+    } else {
+      setDetail(null);
+    }
+
+    return () => {
+      console.log('Cancel fetch: abort');
+      setDetail(null);
+    };
+  }, [isFocused]);
+
   const getDetails = () => {
-    // setLoading(true);
-    // setDetail(null);
     Axios.get(`http://www.omdbapi.com/?t=${Name}&apikey=a851fc51`)
       .then((res) => {
-        // setLoading(false);
         setDetail(res.data);
       })
       .catch((err) => {
@@ -64,6 +74,7 @@ const MovieDetails = ({navigation, route}) => {
         console.log(err);
       });
   };
+
   return (
     <View style={{flex: 1, backgroundColor: Colors.themeBlack}}>
       <View
