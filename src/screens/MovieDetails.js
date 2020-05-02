@@ -45,21 +45,22 @@ const det = {
 const MovieDetails = ({navigation, route}) => {
   const {Name, Image, Link} = route.params;
   const [Detail, setDetail] = useState(null);
+  const [Loading, setLoading] = useState(false);
+  console.log('MovieDetails', Name);
+
   useEffect(() => {
     getDetails();
   }, [Name]);
-
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-      Orientation.lockToPortrait();
-    });
-  }, []);
   const getDetails = () => {
+    // setLoading(true);
+    // setDetail(null);
     Axios.get(`http://www.omdbapi.com/?t=${Name}&apikey=a851fc51`)
       .then((res) => {
+        // setLoading(false);
         setDetail(res.data);
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
       });
   };
@@ -97,7 +98,7 @@ const MovieDetails = ({navigation, route}) => {
         </TextComponent>
       </View>
       <View style={{padding: 10, flex: 1}}>
-        {Detail ? (
+        {Detail && !Loading ? (
           <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: 50}}>
             <View
               style={{

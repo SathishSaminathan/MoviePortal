@@ -13,18 +13,20 @@ const ref = firestore().collection('movielist');
 
 const MovieComponent = ({videos, title, navigation}) => {
   const handleClick = (Value, Views, Link, Image) => {
-    ref
-      .doc(Value)
-      .update({
-        // Views: Views + 1,
-        Views,
-      })
-      .then((res) => {
-        navigation.navigate('MovieDetails', {Link, Name: Value, Image});
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // ref
+    //   .doc(Value)
+    //   .update({
+    //     // Views: Views + 1,
+    //     Views,
+    //   })
+    //   .then((res) => {
+    //     navigation.navigate('MovieDetails', {Link, Name: Value, Image});
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    navigation.navigate('MovieDetails', {Link, Name: Value, Image});
+    console.log("ptint")
   };
   return (
     videos.length !== 0 && (

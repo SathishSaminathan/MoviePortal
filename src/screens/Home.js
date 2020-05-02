@@ -48,7 +48,7 @@ const Home = (props) => {
   const [List, setList] = useState({});
   useEffect(() => {
     props.navigation.addListener('focus', () => {
-      Orientation.lockToPortrait();
+      // Orientation.lockToPortrait();
     });
     // StatusBar.setBackgroundColor(Colors.yellow);
     // StatusBar.setBarStyle('dark-content');

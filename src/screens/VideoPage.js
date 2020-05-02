@@ -14,15 +14,21 @@ class VideoPage extends Component {
     super(props);
     this.state = {
       Loading: true,
+      Visible: true,
     };
   }
   componentDidMount() {
     this.props.navigation.addListener('focus', () => {
-      Orientation.lockToLandscape();
+      // Orientation.lockToLandscape();
+      this.setState({Visible: true});
+    });
+    this.props.navigation.addListener('blur', () => {
+      this.setState({Visible: false});
+      Orientation.lockToPortrait();
     });
   }
   render() {
-    const {Loading} = this.state;
+    const {Loading, Visible} = this.state;
     const {URL, type, videoURL} = this.props.route.params;
     return (
       <View
@@ -34,21 +40,22 @@ class VideoPage extends Component {
           barStyle="light-content"
           hidden={!Loading}
         /> */}
-        <WebView
-          source={{
-            uri: URL,
-          }}
-          onLoadStart={() => this.setState({Loading: true})}
-          onLoadEnd={() => this.setState({Loading: false})}
-          // style={[
-          //   {
-          //     width: height,
-          //     height: width,
-          //     // backgroundColor: Colors.black,
-          //   },
-          // ]}
-        />
-
+        {Visible && (
+          <WebView
+            source={{
+              uri: URL,
+            }}
+            onLoadStart={() => this.setState({Loading: true})}
+            onLoadEnd={() => this.setState({Loading: false})}
+            // style={[
+            //   {
+            //     width: height,
+            //     height: width,
+            //     // backgroundColor: Colors.black,
+            //   },
+            // ]}
+          />
+        )}
         {Loading && <Loader />}
       </View>
     );
