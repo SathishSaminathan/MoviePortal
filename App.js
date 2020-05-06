@@ -99,7 +99,7 @@ class App extends Component {
           hidden
         />
 
-      {/* {opacityClearToVisible !== 1 ? (
+        {/* {opacityClearToVisible !== 1 ? (
           <View style={{flex: 1}}>
             {fullScreenBlueLayer}
             <MaskedView

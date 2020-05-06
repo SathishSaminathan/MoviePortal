@@ -110,35 +110,46 @@ const Home = (props) => {
   }, []);
   return (
     <>
+      <View
+        style={{
+          backgroundColor: Colors.themeBlack,
+          // height: 300,
+          padding: 10,
+          alignItems: 'flex-start',
+        }}>
+        <View>
+          <TextComponent
+            type={FontType.BOLD}
+            numberOfLines={2}
+            style={[
+              {color: Colors.yellow, fontSize: 60},
+              // {transform: [{scale: 0.5}]},
+            ]}>
+            MOVIE
+          </TextComponent>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TextComponent
+            numberOfLines={2}
+            style={{color: Colors.white, fontSize: 30, paddingRight: 10}}>
+            PORTAL
+          </TextComponent>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => setInfoVisible(true)}>
+            <IconComponent
+              color={Colors.lightGrey}
+              type={IconType.Feather}
+              name="info"
+              size={15}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
       <ScrollView
         overScrollMode="never"
         style={{flex: 1, backgroundColor: Colors.themeBlack}}
         showsVerticalScrollIndicator={false}>
-        <View style={{padding: 20, paddingTop: '10%'}}>
-          <TextComponent
-            type={FontType.BOLD}
-            numberOfLines={2}
-            style={{color: Colors.yellow, fontSize: 60}}>
-            MOVIE
-          </TextComponent>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <TextComponent
-              numberOfLines={2}
-              style={{color: Colors.white, fontSize: 30, paddingRight: 10}}>
-              PORTAL
-            </TextComponent>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => setInfoVisible(true)}>
-              <IconComponent
-                color={Colors.lightGrey}
-                type={IconType.Feather}
-                name="info"
-                size={15}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
         {Videos && <Carousel {...props} data={TopFive} />}
         {Videos
           ? movieCategories.map((cat, i) => (
